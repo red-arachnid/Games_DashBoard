@@ -1,4 +1,5 @@
 ﻿using Games_DashBoard.Model;
+using Games_DashBoard.Services;
 using Microsoft.Extensions.Configuration;
 using System.Net.Sockets;
 using System.Text;
@@ -21,6 +22,9 @@ namespace Games_DashBoard
 
             string clientId = config["IGDB:ClientId"];
 
+            IGDBService igdbService = new IGDBService(clientId, TOKEN);
+
+            /*
             string gameName = "God of War";
             var client = new HttpClient();
             client.BaseAddress = new Uri("https://api.igdb.com/v4/");
@@ -61,7 +65,7 @@ namespace Games_DashBoard
                 Console.WriteLine("MEHHHH");
             }
 
-
+            */
         }
 
         private static async Task<string> GetAccessToken(string clientId, string secret)
