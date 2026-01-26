@@ -1,10 +1,5 @@
 ﻿using Games_DashBoard.Data;
 using Games_DashBoard.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Games_DashBoard.Services
 {
@@ -13,9 +8,9 @@ namespace Games_DashBoard.Services
         private Repository _repository;
         private StoredData _data;
 
-        public GameService()
+        public GameService(Repository repository)
         {
-            _repository = new Repository();
+            _repository = repository;
             _data = _repository.LoadData();
         }
 

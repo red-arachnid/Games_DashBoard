@@ -23,49 +23,6 @@ namespace Games_DashBoard
             string clientId = config["IGDB:ClientId"];
 
             IGDBService igdbService = new IGDBService(clientId, TOKEN);
-
-            /*
-            string gameName = "God of War";
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("https://api.igdb.com/v4/");
-            client.DefaultRequestHeaders.Add("Client-ID", clientId);
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {TOKEN}");
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-
-            var query = "fields name, expansions.name, dlcs.name, first_release_date, game_modes.name, genres.name, player_perspectives.name, summary, themes.name;" 
-                + $"search \"{gameName}\";"
-                + "limit 5;";
-            var content = new StringContent(query, Encoding.UTF8, "text/plain");
-
-            var response = await client.PostAsync("games", content);
-            if (response.IsSuccessStatusCode)
-            {
-                var result = await response.Content.ReadAsStringAsync();
-                var datas = JsonSerializer.Deserialize<List<IGDBGameData>>(result);
-
-                Console.WriteLine(datas[0].Id);
-                Console.WriteLine(datas[0].Name);
-                Console.WriteLine($"Release Date : {DateTimeOffset.FromUnixTimeSeconds(datas[0].ReleaseDate).DateTime}");
-
-                Console.Write("Genres : ");
-                foreach(var data in datas[0].GameModes)
-                    Console.Write($"{data.Name},  ");
-                foreach(var data in datas[0].Genres)
-                    Console.Write($"{data.Name},  ");
-                foreach(var data in datas[0].PlayerPerspectives)
-                    Console.Write($"{data.Name},  ");
-                foreach(var data in datas[0].Themes)
-                    Console.Write($"{data.Name},  ");
-
-                Console.WriteLine("\n\n");
-                Console.WriteLine(datas[0].Summary);
-            }
-            else
-            {
-                Console.WriteLine("MEHHHH");
-            }
-
-            */
         }
 
         private static async Task<string> GetAccessToken(string clientId, string secret)

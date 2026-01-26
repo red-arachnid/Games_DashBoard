@@ -1,10 +1,6 @@
 ﻿using Games_DashBoard.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Games_DashBoard.Services
 {
