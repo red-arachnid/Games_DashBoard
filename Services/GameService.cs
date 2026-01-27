@@ -21,10 +21,21 @@ namespace Games_DashBoard.Services
 
         /// <summary>Add a New Game To User Library</summary>
         /// <returns>Returns false if the game is already in user's library</returns>
-        public bool AddNewGame(Game game)
+        public bool AddNewGame(Guid userId, int igdbGameId, int gameplayReview, int storyReview, int visualReview, int audioReview, int creativityReview)
         {
-            if (_data.Games.Any(game => game.IGDBGameId == game.IGDBGameId))
+            if (_data.Games.Any(g => g.IGDBGameId == igdbGameId))
                 return false;
+
+            Game game = new Game()
+            {
+                UserId = userId,
+                IGDBGameId = igdbGameId,
+                GameplayReview = gameplayReview,
+                StoryReview = storyReview,
+                VisualReview = visualReview,
+                AudioReview = audioReview,
+                CreativityReview = creativityReview
+            };
 
             _data.Games.Add(game);
             _repository.SaveData(_data);

@@ -4,11 +4,9 @@ using Games_DashBoard.Services;
 using Games_DashBoard.UI;
 using Microsoft.Extensions.Configuration;
 using Spectre.Console;
-using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Games_DashBoard
 {

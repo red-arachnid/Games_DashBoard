@@ -1,6 +1,7 @@
 ﻿using Games_DashBoard.Model;
 using Games_DashBoard.Services;
 using Spectre.Console;
+using Spectre.Console.Extensions;
 
 namespace Games_DashBoard.UI
 {
@@ -15,7 +16,6 @@ namespace Games_DashBoard.UI
             _userService = userService;
             _gameService = gameService;
             _igdbService = igdbService;
-            Table table = new Table();
         }
 
         public async Task AddNewGame(User currentUser)
@@ -24,7 +24,10 @@ namespace Games_DashBoard.UI
             string gameName = AnsiConsole.Prompt(
                 new TextPrompt<string>("Search [green]Game[/] : "));
 
-            List<IGDBGameData> games = await _igdbService.GetGamesByName(gameName);
+            List<IGDBGameData> games = await AnsiConsole.Status()
+                .Spinner(Spinner.Known.Aesthetic)
+                .SpinnerStyle(Style.Parse("gold1"))
+                .StartAsync("Searching Games....", async ctx => await _igdbService.GetGamesByName(gameName));
 
             var gameNames = games.Select(game => game.Name).Append("Go Back").ToArray();
             var choice = AnsiConsole.Prompt(
@@ -40,6 +43,8 @@ namespace Games_DashBoard.UI
             if (gameData == null)
             {
                 //Add logic for unable to fetch data
+                AnsiConsole.MarkupLine("[red]Something went wrong. Please tyr again.");
+                Console.ReadKey(true);
                 return;
             }
 
@@ -67,14 +72,14 @@ namespace Games_DashBoard.UI
 
                     if (choice == "No") return;
 
-                    bool isSuccess = _gameService.AddNewGame(new Game(
+                    bool isSuccess = _gameService.AddNewGame(
                         currentUser.Id,
                         gameData.Id,
                         review[reviewFields[0]],
                         review[reviewFields[1]],
                         review[reviewFields[2]],
                         review[reviewFields[3]],
-                        review[reviewFields[4]])
+                        review[reviewFields[4]]
                     );
 
                     if (isSuccess)
@@ -91,23 +96,48 @@ namespace Games_DashBoard.UI
 
         public async Task ShowLibrary(User currentUser)
         {
+            
             List<Game> games = _gameService.GetLibraryOfUser(currentUser.Id);
             if (games == null) return;
 
-            List<IGDBGameData> gamesData = await _igdbService.GetGamesByIds(games.Select(game => game.IGDBGameId).ToArray());
-            if (gamesData == null) return;
+            List<IGDBGameData> gamesData = await AnsiConsole.Status()
+                .Spinner(Spinner.Known.Aesthetic)
+                .SpinnerStyle(Style.Parse("gold1"))
+                .StartAsync("Fetching Game Library....", async ctx => await _igdbService.GetGamesByIds(games.Select(game => game.IGDBGameId).ToArray()));
 
-            Table table = new Table();
-            table.AddColumn("Serial No.");
-            table.AddColumn("Game Name");
+            if (gamesData == null)
+            {
+                AnsiConsole.Markup($"[red bold]No Games in your library![/]\n[grey]You can add games by going to add game option[/]");
+                Console.ReadKey(true);
+                return;
+            }
 
+            var header = new Padder(
+                new Rows(new Text("Your Game Library", new Style(Color.Gold1, decoration: Decoration.Bold))))
+                .Padding(0, 1, 0, 1);
+
+            Table table = new Table().HideHeaders().NoBorder();
+            table.AddColumn("Left");
+            table.AddColumn("Right");
             int i = 1;
             foreach (IGDBGameData gameData in gamesData)
             {
                 table.AddRow(i++.ToString(), gameData.Name);
             }
-            AnsiConsole.Write(table);
-            Console.ReadKey();
+
+            var layout = new Rows(
+                header,
+                new Rule().RuleStyle("grey").Centered(),
+                table);
+
+            var panel = new Panel(layout)
+                .Header(" Game Profile ")
+                .Expand()
+                .Border(BoxBorder.Rounded)
+                .BorderColor(Color.DeepSkyBlue1);
+
+            AnsiConsole.Write(new Align(panel, HorizontalAlignment.Center, VerticalAlignment.Middle));
+            Console.ReadKey(true);
         }
 
         private async Task ShowGameInfo(IGDBGameData gameData)
@@ -178,6 +208,5 @@ namespace Games_DashBoard.UI
             }
             return reviews;
         }
-
     }
 }
