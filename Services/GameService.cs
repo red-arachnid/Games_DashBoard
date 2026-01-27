@@ -14,30 +14,19 @@ namespace Games_DashBoard.Services
             _data = _repository.LoadData();
         }
 
+
+        /// <summary>Get the List of Game Library of a User</summary>
         public List<Game> GetLibraryOfUser(Guid userId)
             => _data.Games.Where(game => game.UserId == userId).ToList();
 
-        public bool AddNewGame(Guid userId, int gameId, int gameplayReview, int visualReview, int performanceReview, int audioReview,
-            int experienceReview, int atmosphereReview, int creativityReview, int replayabilityReview)
+        /// <summary>Add a New Game To User Library</summary>
+        /// <returns>Returns false if the game is already in user's library</returns>
+        public bool AddNewGame(Game game)
         {
-            if (_data.Games.Any(game => game.IGDBGameId == gameId))
+            if (_data.Games.Any(game => game.IGDBGameId == game.IGDBGameId))
                 return false;
 
-            Game newGame = new Game()
-            {
-                UserId = userId,
-                IGDBGameId = gameId,
-                GameplayReview = gameplayReview,
-                VisualReview = visualReview,
-                PerformanceReview = performanceReview,
-                AudioReview = audioReview,
-                ExperienceReview = experienceReview,
-                AtmosphereReview = atmosphereReview,
-                CreativityReview = creativityReview,
-                ReplayabilityReview = replayabilityReview
-            };
-
-            _data.Games.Add(newGame);
+            _data.Games.Add(game);
             _repository.SaveData(_data);
             return true;
         }

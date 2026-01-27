@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|c:\\_myfiles\\programming\\c#\\games_dashboard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|c:\\_myfiles\\programming\\c#\\games_dashboard\\ui\\mainscreenui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|solutionrelative:ui\\mainscreenui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|c:\\_myfiles\\programming\\c#\\games_dashboard\\ui\\loginscreenui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|solutionrelative:ui\\loginscreenui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|c:\\_myfiles\\programming\\c#\\games_dashboard\\services\\igdbservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,16 +19,8 @@
       "RelativeMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|solutionrelative:model\\igdbgamedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|c:\\_myfiles\\programming\\c#\\games_dashboard\\data\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|solutionrelative:data\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|c:\\_myfiles\\programming\\c#\\games_dashboard\\model\\storeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|solutionrelative:model\\storeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|c:\\_myfiles\\programming\\c#\\games_dashboard\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|solutionrelative:model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|c:\\_myfiles\\programming\\c#\\games_dashboard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3F3F86E5-A02A-465D-9F3B-45CB3F426B99}|Games_DashBoard.csproj|c:\\_myfiles\\programming\\c#\\games_dashboard\\model\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,93 +42,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "StoredData.cs",
-              "DocumentMoniker": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Model\\StoredData.cs",
-              "RelativeDocumentMoniker": "Model\\StoredData.cs",
-              "ToolTip": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Model\\StoredData.cs",
-              "RelativeToolTip": "Model\\StoredData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwsAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-26T05:34:54.771Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Repository.cs",
-              "DocumentMoniker": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Data\\Repository.cs",
-              "RelativeDocumentMoniker": "Data\\Repository.cs",
-              "ToolTip": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Data\\Repository.cs",
-              "RelativeToolTip": "Data\\Repository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-26T05:33:40.714Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "Game.cs",
               "DocumentMoniker": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Model\\Game.cs",
               "RelativeDocumentMoniker": "Model\\Game.cs",
               "ToolTip": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Model\\Game.cs",
               "RelativeToolTip": "Model\\Game.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABWAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwYAAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T12:33:43.662Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Model\\User.cs",
-              "RelativeDocumentMoniker": "Model\\User.cs",
-              "ToolTip": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Model\\User.cs",
-              "RelativeToolTip": "Model\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T12:27:01.762Z",
+              "WhenOpened": "2026-01-27T02:57:09.647Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "IGDBGameData.cs",
-              "DocumentMoniker": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Model\\IGDBGameData.cs",
-              "RelativeDocumentMoniker": "Model\\IGDBGameData.cs",
-              "ToolTip": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Model\\IGDBGameData.cs",
-              "RelativeToolTip": "Model\\IGDBGameData.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAkwAcAAABdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T10:52:53.224Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAkwBkAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-23T13:41:07.369Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "IGDBService.cs",
               "DocumentMoniker": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Services\\IGDBService.cs",
               "RelativeDocumentMoniker": "Services\\IGDBService.cs",
               "ToolTip": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Services\\IGDBService.cs",
               "RelativeToolTip": "Services\\IGDBService.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAmwDMAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAmwBYAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-26T05:47:33.254Z",
+              "WhenOpened": "2026-01-26T13:54:06.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IGDBGameData.cs",
+              "DocumentMoniker": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Model\\IGDBGameData.cs",
+              "RelativeDocumentMoniker": "Model\\IGDBGameData.cs",
+              "ToolTip": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Model\\IGDBGameData.cs",
+              "RelativeToolTip": "Model\\IGDBGameData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAiwA0AAABxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-26T13:29:35.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginScreenUI.cs",
+              "DocumentMoniker": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\UI\\LoginScreenUI.cs",
+              "RelativeDocumentMoniker": "UI\\LoginScreenUI.cs",
+              "ToolTip": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\UI\\LoginScreenUI.cs",
+              "RelativeToolTip": "UI\\LoginScreenUI.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAAwCcAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-26T12:21:43.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainScreenUI.cs",
+              "DocumentMoniker": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\UI\\MainScreenUI.cs",
+              "RelativeDocumentMoniker": "UI\\MainScreenUI.cs",
+              "ToolTip": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\UI\\MainScreenUI.cs",
+              "RelativeToolTip": "UI\\MainScreenUI.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAiwDIAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-26T12:21:17.735Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\_MyFiles\\Programming\\C#\\Games_DashBoard\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAcwCoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-23T13:41:07.369Z",
               "EditorCaption": ""
             }
           ]

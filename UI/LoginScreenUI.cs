@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 
 namespace Games_DashBoard.UI
 {
-    public class LoginScreen
+    public class LoginScreenUI
     {
         private UserService _userService;
 
-        public LoginScreen(UserService userService)
+        public LoginScreenUI(UserService userService)
         {
             _userService = userService;
         }
 
-        public void Login(User currentUser)
+        public User Login()
         {
+            User currentUser = null!;
             string username = AnsiConsole.Ask<string>("Enter [green]Username[/] : ");
             string password = AnsiConsole.Prompt(
                 new TextPrompt<string>("Enter [green]Password[/] : ")
@@ -37,6 +38,8 @@ namespace Games_DashBoard.UI
                 AnsiConsole.MarkupLine("[bold red]Invalid Username or Password![/]");
             else
                 AnsiConsole.MarkupLineInterpolated($"[green]Successfully logged in as {currentUser.Username}![/]");
+
+            return currentUser!;
         }
 
         public void Register()

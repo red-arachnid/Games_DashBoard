@@ -1,6 +1,9 @@
-﻿using Games_DashBoard.Model;
+﻿using Games_DashBoard.Data;
+using Games_DashBoard.Model;
 using Games_DashBoard.Services;
+using Games_DashBoard.UI;
 using Microsoft.Extensions.Configuration;
+using Spectre.Console;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -16,13 +19,61 @@ namespace Games_DashBoard
 
         static async Task Main()
         {
+            Console.OutputEncoding = Encoding.UTF8;
+            AnsiConsole.Profile.Capabilities.Ansi = true;
+            AnsiConsole.Profile.Capabilities.Unicode = true;
+            AnsiConsole.Clear();
+
             var config = new ConfigurationBuilder()
                 .AddUserSecrets<Program>()
                 .Build();
-
             string clientId = config["IGDB:ClientId"];
 
+            Repository repository = new Repository();
+            UserService userService = new UserService(repository);
+            GameService gameService = new GameService(repository);
             IGDBService igdbService = new IGDBService(clientId, TOKEN);
+            LoginScreenUI loginScreen = new LoginScreenUI(userService);
+            MainScreenUI mainScreen = new MainScreenUI(userService, gameService, igdbService);
+            User currentUser = null!;
+
+            string text = "Welcome! ";
+            AnsiConsole.Write(new FigletText("Game Dashboard") { Color = Color.OrangeRed1, Justification = Justify.Center });
+
+            await mainScreen.AddNewGame();
+
+            /*
+            while (true)
+            {
+                if (currentUser == null)
+                {
+                    var choice = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                        .Title($"{text}Please select an option : ")
+                        .AddChoices("Login", "Register", "Exit"));
+
+                    switch (choice)
+                    {
+                        case "Login":
+                            currentUser = loginScreen.Login();
+                            break;
+                        case "Register":
+                            loginScreen.Register();
+                            break;
+                        case "Exit":
+                            Environment.Exit(0);
+                            break;
+                    }
+
+                    text = "";
+                }
+                else
+                {
+                    AnsiConsole.Clear();
+                    await mainScreen.AddNewGame();
+                }
+            }
+            */
         }
 
         private static async Task<string> GetAccessToken(string clientId, string secret)
