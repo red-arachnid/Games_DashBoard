@@ -18,7 +18,7 @@ namespace Games_DashBoard.UI
             Table table = new Table();
         }
 
-        public async Task AddNewGame()
+        public async Task AddNewGame(User currentUser)
         {
             //Fetch Game
             string gameName = AnsiConsole.Prompt(
@@ -55,7 +55,34 @@ namespace Games_DashBoard.UI
             switch (choice)
             {
                 case "Add Game":
-                    //Ask for Review first
+                    var reviewFields = new[] { "Gameplay", "Story", "Visuals", "Audio", "Creativity" };
+                    var review = ReviewQuery(reviewFields);
+
+                    choice = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                        .Title("[grey]Are you sure you want to add this game to your library??[/]")
+                        .PageSize(3)
+                        .HighlightStyle(new Style(Color.Gold1, decoration: Decoration.Bold))
+                        .AddChoices("Yes", "No"));
+
+                    if (choice == "No") return;
+
+                    bool isSuccess = _gameService.AddNewGame(new Game(
+                        currentUser.Id,
+                        gameData.Id,
+                        review[reviewFields[0]],
+                        review[reviewFields[1]],
+                        review[reviewFields[2]],
+                        review[reviewFields[3]],
+                        review[reviewFields[4]])
+                    );
+
+                    if (isSuccess)
+                        AnsiConsole.MarkupLine($"[green]Successfully added {gameData.Name} to your Library[/]");
+                    else
+                        AnsiConsole.MarkupLine($"[red]There was a problem while adding the game. Please try again.[/]");
+                    Console.ReadKey();
+
                     break;
                 case "Go Back":
                     return;
@@ -79,6 +106,8 @@ namespace Games_DashBoard.UI
             {
                 table.AddRow(i++.ToString(), gameData.Name);
             }
+            AnsiConsole.Write(table);
+            Console.ReadKey();
         }
 
         private async Task ShowGameInfo(IGDBGameData gameData)
@@ -122,9 +151,33 @@ namespace Games_DashBoard.UI
             AnsiConsole.Write(new Align(panel, HorizontalAlignment.Center, VerticalAlignment.Middle));
         }
 
-        private void ReviewQuery()
+        private Dictionary<string, int> ReviewQuery(string[] reviewFields)
         {
+            var reviews = new Dictionary<string, int>();
 
+            var header = new Panel(
+                new Text("GAME EVALUATION", new Style(Color.Gold1, decoration: Decoration.Bold)).Centered())
+                .BorderColor(Color.DeepSkyBlue1)
+                .Border(BoxBorder.Rounded)
+                .Expand();
+
+            AnsiConsole.Clear();
+            AnsiConsole.Write(new Align(header, HorizontalAlignment.Center));
+
+            foreach (var field in reviewFields)
+            {
+                var response = AnsiConsole.Prompt(
+                    new TextPrompt<int>($"[bold underline]Rate {field} of the game [grey](between 0 - 10)[/]: [/]")
+                    .PromptStyle("gold1")
+                    .Validate(review => (review > 10 || review < 0)
+                    ? ValidationResult.Error("[red]Please enter a valid review [grey](between 0 - 10)[/][/]")
+                    : ValidationResult.Success()));
+
+                reviews[field] = response;
+                AnsiConsole.Write(new Rule().RuleStyle("grey").Centered());
+            }
+            return reviews;
         }
+
     }
 }

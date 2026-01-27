@@ -40,17 +40,15 @@ namespace Games_DashBoard
             string text = "Welcome! ";
             AnsiConsole.Write(new FigletText("Game Dashboard") { Color = Color.OrangeRed1, Justification = Justify.Center });
 
-            await mainScreen.AddNewGame();
-
-            /*
             while (true)
             {
                 if (currentUser == null)
                 {
                     var choice = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
-                        .Title($"{text}Please select an option : ")
-                        .AddChoices("Login", "Register", "Exit"));
+                        .Title($"[grey]{text}Please select an option : [/]")
+                        .AddChoices("Login", "Register", "Exit")
+                        .HighlightStyle(new Style(Color.Gold1, decoration: Decoration.Bold)));
 
                     switch (choice)
                     {
@@ -64,16 +62,31 @@ namespace Games_DashBoard
                             Environment.Exit(0);
                             break;
                     }
-
                     text = "";
                 }
                 else
                 {
                     AnsiConsole.Clear();
-                    await mainScreen.AddNewGame();
+                    var choice = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                        .Title($"[grey]Please select an option[/]")
+                        .AddChoices("See Library", "Add New Game", "Log Out")
+                        .HighlightStyle(new Style(Color.Gold1, decoration: Decoration.Bold)));
+
+                    switch (choice)
+                    {
+                        case "See Library":
+                            await mainScreen.ShowLibrary(currentUser);
+                            break;
+                        case "Add New Game":
+                            await mainScreen.AddNewGame(currentUser);
+                            break;
+                        case "Log Out":
+                            currentUser = null!;
+                            break;
+                    }
                 }
             }
-            */
         }
 
         private static async Task<string> GetAccessToken(string clientId, string secret)
