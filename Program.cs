@@ -12,7 +12,6 @@ namespace Games_DashBoard
 {
     public class Program
     {
-        
         private static readonly string TOKEN = "9gu5yh01iufgzcoscmks8jhis59lu9";
 
         static async Task Main()

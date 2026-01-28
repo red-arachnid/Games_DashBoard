@@ -95,7 +95,6 @@ namespace Games_DashBoard.UI
 
         public async Task ShowLibrary(User currentUser)
         {
-            
             List<Game> games = _gameService.GetLibraryOfUser(currentUser.Id);
             if (games == null) return;
 
@@ -117,33 +116,66 @@ namespace Games_DashBoard.UI
                 Console.ReadKey(true);
                 return;
             }
-
-            var header = new Padder(
-                new Rows(new Text("Your Game Library", new Style(Color.Gold1, decoration: Decoration.Bold))))
+            
+            //Loop if the user wants to show data in a different order 
+            while (true)
+            {
+                Program.ClearConsole();
+                var header = new Padder(
+                new Rows(new Text("Your Game Library", new Style(Color.Gold1, decoration: Decoration.Bold)).Centered()))
                 .Padding(0, 1, 0, 1);
 
-            Table table = new Table().HideHeaders().NoBorder();
-            table.AddColumn("Left");
-            table.AddColumn("Right");
-            int i = 1;
-            foreach (IGDBGameData gameData in gamesData)
-            {
-                table.AddRow(i++.ToString(), gameData.Name);
+                Table table = new Table().HideHeaders().NoBorder();
+                table.AddColumn("Sr Number");
+                table.AddColumn("Name").Width(70);
+                table.AddColumn("Date Added");
+                table.AddColumn("Rating");
+                int i = 1;
+                foreach (IGDBGameData gameData in gamesData)
+                {
+                    Game currentGame = games.FirstOrDefault(g => g.IGDBGameId == gameData.Id, null!);
+                    double score = currentGame?.FinalScore ?? 0;
+                    int starCount = (int)Math.Round(score);
+                    string stars = new string('★', starCount);
+                    string empty = new string('☆', 10 - starCount);
+                    string ratingRender = $"[yellow]{stars}[/][grey]{empty}[/]";
+
+                    string releaseDate = currentGame?.DateAdded.ToString("dd/MM/yyyy") ?? "";
+
+                    table.AddRow(i++.ToString(), gameData.Name, releaseDate, ratingRender);
+                }
+
+                var layout = new Rows(
+                    header,
+                    new Rule().RuleStyle("grey").Centered(),
+                    table);
+
+                var panel = new Panel(layout)
+                    .Header(" Game Profile ")
+                    .Expand()
+                    .Border(BoxBorder.Rounded)
+                    .BorderColor(Color.DeepSkyBlue1);
+
+                AnsiConsole.Write(new Align(panel, HorizontalAlignment.Center, VerticalAlignment.Middle));
+
+                var choice = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                    .Title("[grey]Select your action : [/]")
+                    .AddChoices("Go Back", "Sort By Name", "Sort By Date Added")
+                    .HighlightStyle(new Style(Color.Gold1, decoration: Decoration.Bold)));
+
+                switch (choice)
+                {
+                    case "Sort By Name":
+                        gamesData = gamesData.OrderBy(data => data.Name).ToList();
+                        break;
+                    case "Sort By Date Added":
+                        gamesData = gamesData.OrderBy(data => data.ReleaseDate).ToList();
+                        break;
+                    case "Go Back":
+                        return;
+                }
             }
-
-            var layout = new Rows(
-                header,
-                new Rule().RuleStyle("grey").Centered(),
-                table);
-
-            var panel = new Panel(layout)
-                .Header(" Game Profile ")
-                .Expand()
-                .Border(BoxBorder.Rounded)
-                .BorderColor(Color.DeepSkyBlue1);
-
-            AnsiConsole.Write(new Align(panel, HorizontalAlignment.Center, VerticalAlignment.Middle));
-            Console.ReadKey(true);
         }
 
         private async Task ShowGameInfo(IGDBGameData gameData)
