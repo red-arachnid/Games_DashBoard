@@ -28,15 +28,16 @@ namespace Games_DashBoard
             string clientId = config["IGDB:ClientId"];
 
             Repository repository = new Repository();
-            UserService userService = new UserService(repository);
-            GameService gameService = new GameService(repository);
+            StoredData data = repository.LoadData();
+            UserService userService = new UserService(repository, data);
+            GameService gameService = new GameService(repository, data);
             IGDBService igdbService = new IGDBService(clientId, TOKEN);
             LoginScreenUI loginScreen = new LoginScreenUI(userService);
-            MainScreenUI mainScreen = new MainScreenUI(userService, gameService, igdbService);
+            MainScreenUI mainScreen = new MainScreenUI(gameService, igdbService);
             User currentUser = null!;
 
             string text = "Welcome! ";
-            AnsiConsole.Write(new FigletText("Game Dashboard") { Color = Color.OrangeRed1, Justification = Justify.Center });
+            ClearConsole();
 
             while (true)
             {
@@ -64,7 +65,7 @@ namespace Games_DashBoard
                 }
                 else
                 {
-                    AnsiConsole.Clear();
+                    ClearConsole();
                     var choice = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
                         .Title($"[grey]Please select an option[/]")
@@ -85,6 +86,12 @@ namespace Games_DashBoard
                     }
                 }
             }
+        }
+
+        public static void ClearConsole()
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(new FigletText("Game Dashboard") { Color = Color.OrangeRed1, Justification = Justify.Center });
         }
 
         private static async Task<string> GetAccessToken(string clientId, string secret)

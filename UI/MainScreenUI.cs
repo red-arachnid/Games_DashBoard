@@ -7,13 +7,11 @@ namespace Games_DashBoard.UI
 {
     public class MainScreenUI
     {
-        private UserService _userService;
         private GameService _gameService;
         private IGDBService _igdbService;
 
-        public MainScreenUI(UserService userService, GameService gameService, IGDBService igdbService)
+        public MainScreenUI(GameService gameService, IGDBService igdbService)
         {
-            _userService = userService;
             _gameService = gameService;
             _igdbService = igdbService;
         }
@@ -33,7 +31,8 @@ namespace Games_DashBoard.UI
             var choice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Result games : ")
-                .AddChoices(gameNames));
+                .AddChoices(gameNames)
+                .HighlightStyle(new Style(Color.Gold1, decoration: Decoration.Bold)));
 
             if (choice == "Go Back")
                 return;
@@ -100,6 +99,13 @@ namespace Games_DashBoard.UI
             List<Game> games = _gameService.GetLibraryOfUser(currentUser.Id);
             if (games == null) return;
 
+            if (games.Count == 0)
+            {
+                AnsiConsole.Markup($"[red bold]No Games in your library![/]\n[grey]You can add games by going to add game option[/]");
+                Console.ReadKey(true);
+                return;
+            }
+
             List<IGDBGameData> gamesData = await AnsiConsole.Status()
                 .Spinner(Spinner.Known.Aesthetic)
                 .SpinnerStyle(Style.Parse("gold1"))
@@ -107,7 +113,7 @@ namespace Games_DashBoard.UI
 
             if (gamesData == null)
             {
-                AnsiConsole.Markup($"[red bold]No Games in your library![/]\n[grey]You can add games by going to add game option[/]");
+                AnsiConsole.Markup($"[red bold]There was some problem while fetching your game data. Please try again[/]");
                 Console.ReadKey(true);
                 return;
             }
@@ -148,7 +154,7 @@ namespace Games_DashBoard.UI
             List<string> dlcs = gameData.DLCs.Select(dl => dl.Name).ToList();
             dlcs.AddRange(gameData.Expansions.Select(exp => exp.Name).ToList());
 
-            AnsiConsole.Clear();
+            Program.ClearConsole();
             var header = new Padder(
                 new Rows(
                     new Text(gameData.Name, new Style(Color.Gold1, decoration: Decoration.Bold)).Centered(),
@@ -191,7 +197,7 @@ namespace Games_DashBoard.UI
                 .Border(BoxBorder.Rounded)
                 .Expand();
 
-            AnsiConsole.Clear();
+            Program.ClearConsole();
             AnsiConsole.Write(new Align(header, HorizontalAlignment.Center));
 
             foreach (var field in reviewFields)

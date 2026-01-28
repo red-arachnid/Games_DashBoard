@@ -1,11 +1,6 @@
 ﻿using Games_DashBoard.Model;
 using Games_DashBoard.Services;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Games_DashBoard.UI
 {
@@ -70,7 +65,8 @@ namespace Games_DashBoard.UI
             var confirm = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Are you sure you want to create this account?")
-                .AddChoices("Yes", "No"));
+                .AddChoices("Yes", "No")
+                .HighlightStyle(new Style(Color.Gold1, decoration: Decoration.Bold)));
 
             switch (confirm)
             {

@@ -8,10 +8,10 @@ namespace Games_DashBoard.Services
         private Repository _repository;
         private StoredData _data;
 
-        public UserService(Repository repository)
+        public UserService(Repository repository, StoredData data)
         {
             _repository = repository;
-            _data = _repository.LoadData();
+            _data = data;
         }
 
         /// <summary>Login an existing user</summary>

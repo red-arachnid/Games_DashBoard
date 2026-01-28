@@ -8,10 +8,10 @@ namespace Games_DashBoard.Services
         private Repository _repository;
         private StoredData _data;
 
-        public GameService(Repository repository)
+        public GameService(Repository repository, StoredData data)
         {
             _repository = repository;
-            _data = _repository.LoadData();
+            _data = data;
         }
 
 
@@ -23,7 +23,7 @@ namespace Games_DashBoard.Services
         /// <returns>Returns false if the game is already in user's library</returns>
         public bool AddNewGame(Guid userId, int igdbGameId, int gameplayReview, int storyReview, int visualReview, int audioReview, int creativityReview)
         {
-            if (_data.Games.Any(g => g.IGDBGameId == igdbGameId))
+            if (_data.Games.Any(g => g.IGDBGameId == igdbGameId && g.UserId == userId))
                 return false;
 
             Game game = new Game()
