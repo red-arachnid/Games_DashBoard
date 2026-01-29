@@ -20,6 +20,7 @@ namespace Games_DashBoard
             AnsiConsole.Clear();
 
             var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddUserSecrets<Program>()
                 .Build();
 
