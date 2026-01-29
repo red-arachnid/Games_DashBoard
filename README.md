@@ -79,4 +79,4 @@ Games_Dashboard/
 
 ## 📺 Demo
 
-![Demo]()
+![Demo](assets/Preview.gif)
