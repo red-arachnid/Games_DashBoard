@@ -71,7 +71,7 @@ namespace Games_DashBoard.UI
 
                     if (choice == "No") return;
 
-                    bool isSuccess = _gameService.AddNewGame(
+                    bool isSuccess = await _gameService.AddNewGame(
                         currentUser.Id,
                         gameData.Id,
                         review[reviewFields[0]],
