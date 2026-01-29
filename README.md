@@ -75,7 +75,7 @@ Games_Dashboard/
 ├── Services/       # Business Logic (Auth, IGDB API, Game Management)
 ├── UI/             # Spectre.Console Screens & Interactions
 └── Program.cs      # Entry point & Dependency Injection
-
+```
 
 ## 📺 Demo
 
