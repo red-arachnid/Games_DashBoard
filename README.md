@@ -1,4 +1,4 @@
-﻿# 🎮 Game Dashboard Console Application
+# Games_DashBoard
 
 A robust, console-based Game Library Manager built with **.NET** and **Spectre.Console**. This application allows users to manage their personal game collection by fetching real-time data from the **IGDB API**.
 
@@ -52,7 +52,7 @@ This project demonstrates modern C# best practices:
 
 1.  **Clone the repository**
     ```bash
-    git clone [https://github.com/red-arachnid/Games_Dashboard.git](https://github.com/red-arachnid/Games_Dashboard.git)
+    git clone https://github.com/red-arachnid/Games_Dashboard.git
     ```
 2.  **Configure API Keys (User Secrets)**
     ```bash

@@ -20,7 +20,6 @@ namespace Games_DashBoard
             AnsiConsole.Clear();
 
             var config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddUserSecrets<Program>()
                 .Build();
 
@@ -55,7 +54,7 @@ namespace Games_DashBoard
                             currentUser = loginScreen.Login();
                             break;
                         case "Register":
-                            loginScreen.Register();
+                            await loginScreen.Register();
                             break;
                         case "Exit":
                             Environment.Exit(0);

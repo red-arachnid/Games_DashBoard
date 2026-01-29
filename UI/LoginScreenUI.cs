@@ -37,7 +37,7 @@ namespace Games_DashBoard.UI
             return currentUser!;
         }
 
-        public void Register()
+        public async Task Register()
         {
             string username, password, confirmPassword;
 
@@ -71,7 +71,7 @@ namespace Games_DashBoard.UI
             switch (confirm)
             {
                 case "Yes":
-                    bool isSuccess = _userService.RegisterUser(username, password);
+                    bool isSuccess = await _userService.RegisterUser(username, password);
                     if (isSuccess)
                         AnsiConsole.MarkupLine("[green]Account created successfully! Please Login.[/]");
                     else
