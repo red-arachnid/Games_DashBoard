@@ -12,8 +12,6 @@ namespace Games_DashBoard
 {
     public class Program
     {
-        private static readonly string TOKEN = "9gu5yh01iufgzcoscmks8jhis59lu9";
-
         static async Task Main()
         {
             Console.OutputEncoding = Encoding.UTF8;
@@ -24,13 +22,15 @@ namespace Games_DashBoard
             var config = new ConfigurationBuilder()
                 .AddUserSecrets<Program>()
                 .Build();
+
             string clientId = config["IGDB:ClientId"];
+            string token = config["IGDB:Token"];
 
             Repository repository = new Repository();
             StoredData data = repository.LoadData();
             UserService userService = new UserService(repository, data);
             GameService gameService = new GameService(repository, data);
-            IGDBService igdbService = new IGDBService(clientId, TOKEN);
+            IGDBService igdbService = new IGDBService(clientId, token);
             LoginScreenUI loginScreen = new LoginScreenUI(userService);
             MainScreenUI mainScreen = new MainScreenUI(gameService, igdbService);
             User currentUser = null!;
@@ -92,30 +92,5 @@ namespace Games_DashBoard
             AnsiConsole.Clear();
             AnsiConsole.Write(new FigletText("Game Dashboard") { Color = Color.OrangeRed1, Justification = Justify.Center });
         }
-
-        private static async Task<string> GetAccessToken(string clientId, string secret)
-        {
-            var client = new HttpClient();
-
-            string authTokenUri = "https://id.twitch.tv/oauth2/token?"
-                + $"client_id={clientId}&"
-                + $"client_secret={secret}&"
-                + $"grant_type=client_credentials";
-
-            var response = await client.PostAsync(authTokenUri, null);
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                var result = JsonSerializer.Deserialize<AccessToken>(content);
-                return result?.Token ?? null!;
-            }
-            else return null!;
-        }
-    }
-
-    public class AccessToken
-    {
-        [JsonPropertyName("access_token")] public string Token { get; set; } = string.Empty;
-        [JsonPropertyName("expires_in")] public int ExpireIn { get; set; }
     }
 }

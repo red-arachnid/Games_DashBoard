@@ -1,4 +1,5 @@
-﻿using Games_DashBoard.Model;
+﻿using Games_DashBoard.Data;
+using Games_DashBoard.Model;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;

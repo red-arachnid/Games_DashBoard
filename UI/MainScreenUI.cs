@@ -42,7 +42,7 @@ namespace Games_DashBoard.UI
             if (gameData == null)
             {
                 //Add logic for unable to fetch data
-                AnsiConsole.MarkupLine("[red]Something went wrong. Please tyr again.");
+                AnsiConsole.MarkupLine("[red]Something went wrong. Please try again.");
                 Console.ReadKey(true);
                 return;
             }
