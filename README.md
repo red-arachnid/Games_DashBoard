@@ -79,4 +79,4 @@ Games_Dashboard/
 
 ## 📺 Demo
 
-!([assets/Preview.gif](https://github.com/red-arachnid/Games_DashBoard/blob/c6217758c2d1c7be26b1ecd0f7cd4b12ba483df7/assets/Preview.gif))
+![Game Dashboard Demo](assets/Preview.gif)
