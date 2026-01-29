@@ -1,5 +1,4 @@
-﻿using Games_DashBoard.Data;
-using Games_DashBoard.Model;
+﻿using Games_DashBoard.Model;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -8,15 +7,17 @@ namespace Games_DashBoard.Services
 {
     public class IGDBService
     {
-        private HttpClient _client;
+        private static HttpClient _client = new HttpClient();
 
         public IGDBService(string clientId, string token)
         {
-            _client = new HttpClient();
-            _client.BaseAddress = new Uri("https://api.igdb.com/v4/");
-            _client.DefaultRequestHeaders.Add("Client-ID", clientId);
-            _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-            _client.DefaultRequestHeaders.Add("Accept", "application/json");
+            if (_client.BaseAddress == null)
+            {
+                _client.BaseAddress = new Uri("https://api.igdb.com/v4/");
+                _client.DefaultRequestHeaders.Add("Client-ID", clientId);
+                _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+                _client.DefaultRequestHeaders.Add("Accept", "application/json");
+            }
         }
 
         /// <summary>Search IGDB for the specified game</summary>

@@ -180,11 +180,19 @@ namespace Games_DashBoard.UI
 
         private async Task ShowGameInfo(IGDBGameData gameData)
         {
-            string developer = await _igdbService.GetCompanyNameByCompanyId(gameData.InvolvedCompanies.FirstOrDefault(company => company.IsDeveloper)!.CompanyId);
+            var devCompany = gameData.InvolvedCompanies.FirstOrDefault(company => company.IsDeveloper);
+
+            string developer = (devCompany != null) 
+                ? await _igdbService.GetCompanyNameByCompanyId(devCompany.CompanyId)
+                : "Unknown Company";
+
             string releaseDate = DateTimeOffset.FromUnixTimeSeconds(gameData.ReleaseDate).ToString("yyyy/MM/dd");
-            List<string> genres = gameData.Genres.Select(genre => genre.Name).ToList();
-            List<string> dlcs = gameData.DLCs.Select(dl => dl.Name).ToList();
-            dlcs.AddRange(gameData.Expansions.Select(exp => exp.Name).ToList());
+
+
+            List<string> genres = gameData.Genres?.Select(genre => genre.Name).ToList() ?? new List<string>();
+            List<string> dlcs = gameData.DLCs?.Select(dl => dl.Name).ToList() ?? new List<string>();
+            if (gameData.Expansions != null)
+                dlcs.AddRange(gameData.Expansions.Select(exp => exp.Name).ToList());
 
             Program.ClearConsole();
             var header = new Padder(

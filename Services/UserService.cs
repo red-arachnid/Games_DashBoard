@@ -33,7 +33,7 @@ namespace Games_DashBoard.Services
 
         /// <summary>Register a new user</summary>
         /// <returns>Returns true on successfull register else returns false</returns>
-        public bool RegisterUser(string username, string password)
+        public async Task<bool> RegisterUser(string username, string password)
         {
             if (CheckDuplicateUser(username))
                 return false;
@@ -42,7 +42,7 @@ namespace Games_DashBoard.Services
 
             User newUser = new User { Username = username, Password = hashedPassword };
             _data.Users.Add(newUser);
-            _repository.SaveData(_data);
+            await _repository.SaveData(_data);
             return true;
         }
 

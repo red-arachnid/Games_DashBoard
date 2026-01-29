@@ -21,7 +21,7 @@ namespace Games_DashBoard.Services
 
         /// <summary>Add a New Game To User Library</summary>
         /// <returns>Returns false if the game is already in user's library</returns>
-        public bool AddNewGame(Guid userId, int igdbGameId, int gameplayReview, int storyReview, int visualReview, int audioReview, int creativityReview)
+        public async Task<bool> AddNewGame(Guid userId, int igdbGameId, int gameplayReview, int storyReview, int visualReview, int audioReview, int creativityReview)
         {
             if (_data.Games.Any(g => g.IGDBGameId == igdbGameId && g.UserId == userId))
                 return false;
@@ -38,7 +38,7 @@ namespace Games_DashBoard.Services
             };
 
             _data.Games.Add(game);
-            _repository.SaveData(_data);
+            await _repository.SaveData(_data);
             return true;
         }
     }

@@ -27,7 +27,7 @@ namespace Games_DashBoard
             string token = config["IGDB:Token"];
 
             Repository repository = new Repository();
-            StoredData data = repository.LoadData();
+            StoredData data = await repository.LoadData();
             UserService userService = new UserService(repository, data);
             GameService gameService = new GameService(repository, data);
             IGDBService igdbService = new IGDBService(clientId, token);

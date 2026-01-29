@@ -9,28 +9,28 @@ namespace Games_DashBoard.Data
     {
         private readonly string FILE_PATH = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data.json");
 
-        public StoredData LoadData()
+        public async Task<StoredData> LoadData()
         {
             if (!File.Exists(FILE_PATH)) 
                 return new StoredData();
 
             try
             {
-                string jsonString = File.ReadAllText(FILE_PATH);
+                string jsonString = await File.ReadAllTextAsync(FILE_PATH);
                 var data = JsonSerializer.Deserialize<StoredData>(jsonString);
                 return data ?? new StoredData();
-            }
-            catch
+            }   
+            catch (JsonException)
             {
                 return new StoredData();
             }
         }
 
-        public void SaveData(StoredData data)
+        public async Task SaveData(StoredData data)
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
             string jsonString = JsonSerializer.Serialize(data, options);
-            File.WriteAllText(FILE_PATH, jsonString);
+            await File.WriteAllTextAsync(FILE_PATH, jsonString);
         }
     }
 }
